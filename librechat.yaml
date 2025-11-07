@@ -223,18 +223,28 @@ endpoints:
   #   # (optional) Agent Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
   #   capabilities: ["execute_code", "file_search", "actions", "tools"]
   custom:
-    - name: "gemproxy"
-      apiKey: '${GEMPROXY_KEY}'
-      description: "General purpose assistant"
-      # No 'group' field - appears as standalone item at top level (not nested)
-      baseURL: 'https://gemproxy.mezeet.com/v1/'
+    - name: "Ollama"
+      apiKey: "ollama"
+      # use 'host.docker.internal' instead of localhost if running LibreChat in a docker container
+      baseURL: "http://ollama:11434/v1/" 
       models:
-      # List of default models to use. At least one value is required.
-        default: ['gemini-2.0-flash', 'gemini-2.5-flash', 'gemini-2.5-pro']
-        # Fetch option: Set to true to fetch models from API.
-        fetch: true # Defaults to false.
-      modelDisplayLabel: 'GemProxy'
-  
+        default: [
+          "llama2",
+          "mistral",
+          "codellama",
+          "dolphin-mixtral",
+          "mistral-openorca"
+          ]
+        # fetching list of models is supported but the `name` field must start
+        # with `ollama` (case-insensitive), as it does in this example.
+        fetch: true
+      titleConvo: true
+      titleModel: "current_model"
+      summarize: false
+      summaryModel: "current_model"
+      forcePrompt: false
+      modelDisplayLabel: "Ollama"
+      
     # Groq Example
     - name: 'groq'
       apiKey: '${GROQ_API_KEY}'
@@ -300,12 +310,15 @@ endpoints:
     - name: 'OpenRouter'
       # For `apiKey` and `baseURL`, you can use environment variables that you define.
       # recommended environment variables:
-      apiKey: '${OPENROUTER_KEY}'
-      baseURL: 'https://openrouter.ai/api/v1'
-      headers:
-          x-librechat-body-parentmessageid: '{{LIBRECHAT_BODY_PARENTMESSAGEID}}'
+      # apiKey: '${OPENROUTER_KEY}'
+      apiKey: '${GEMPROXY_KEY}'
+      # baseURL: 'https://openrouter.ai/api/v1'
+      baseURL: 'https://gemproxy.mezeet.com/v1/'
+      # headers:
+      #     x-librechat-body-parentmessageid: '{{LIBRECHAT_BODY_PARENTMESSAGEID}}'
       models:
-        default: ['meta-llama/llama-3-70b-instruct']
+        # default: ['meta-llama/llama-3-70b-instruct']
+        default: ['gemini-2.0-flash', 'gemini-2.5-flash', 'gemini-2.5-pro']
         fetch: true
       titleConvo: true
       titleModel: 'meta-llama/llama-3-70b-instruct'
