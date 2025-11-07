@@ -36,7 +36,8 @@ services:
     restart: always
     user: "${UID}:${GID}"
     volumes:
-      - ./data-node:/data/db
+      # - ./data-node:/data/db
+      - data-node:/data/db
     command: mongod --noauth
     networks:
       - dokploy-network  
@@ -81,6 +82,7 @@ services:
 
 volumes:
   pgdata2:
+  data-node:
   
 networks:
   dokploy-network:
