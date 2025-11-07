@@ -446,7 +446,7 @@ webSearch:
 #   # Search providers
 #   serperApiKey: '${SERPER_API_KEY}'
   searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
-#   searxngApiKey: '${SEARXNG_API_KEY}'
+  searxngApiKey: '${SEARXNG_API_KEY}'
   searchProvider: "searxng" # Options: "serper", "searxng"
 #   
 #   # Content scrapers
