@@ -27,6 +27,7 @@ services:
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       - ./logs:/app/logs
+      - ./librechat.yml:/app/librechat.yml
     networks:
       - dokploy-network
   mongodb:
